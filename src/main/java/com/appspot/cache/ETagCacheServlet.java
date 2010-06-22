@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Logger;
 
 public class ETagCacheServlet extends HttpServlet {
-
+  private static final long serialVersionUID = 4308584640538822293L;
 
   public void doGet(HttpServletRequest request,
                     HttpServletResponse response)
@@ -24,7 +25,9 @@ public class ETagCacheServlet extends HttpServlet {
     String cacheKey = request.getPathInfo() + "." + "etag";
     String result = null;
 
-    if (!cache.contains(cacheKey)) {
+    if (!cache.contains(cacheKey) ||
+        !cache.get(cacheKey).equals(request
+            .getHeader("If-None-Match"))) {
 
       String etag = Long.toString(System.currentTimeMillis());
       response.setHeader("ETag", etag);
