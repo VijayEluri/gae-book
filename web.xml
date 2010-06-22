@@ -22,7 +22,22 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>SimpleCacheServlet</servlet-name>
 		<url-pattern>/simple-cache</url-pattern>
 	</servlet-mapping>
-
+  <servlet>
+	<servlet-name>InvalidateCacheServlet</servlet-name>
+		<servlet-class>com.appspot.cache.InvalidateCacheServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InvalidateCacheServlet</servlet-name>
+		<url-pattern>/invalidate-cache</url-pattern>
+	</servlet-mapping>
+  <servlet>
+	<servlet-name>ClearCacheServlet</servlet-name>
+		<servlet-class>com.appspot.cache.ClearCacheServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ClearCacheServlet</servlet-name>
+		<url-pattern>/clear-cache</url-pattern>
+	</servlet-mapping>
 
   <!-- Template -->
 	<servlet>
