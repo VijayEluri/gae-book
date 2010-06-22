@@ -4,8 +4,27 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-	
-	<!-- Template -->
+
+<!-- Cache -->
+	<servlet>
+		<servlet-name>ETagCacheServlet</servlet-name>
+		<servlet-class>com.appspot.cache.ETagCacheServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ETagCacheServlet</servlet-name>
+		<url-pattern>/etag-cache</url-pattern>
+	</servlet-mapping>
+  <servlet>
+		<servlet-name>SimpleCacheServlet</servlet-name>
+		<servlet-class>com.appspot.cache.SimpleCacheServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SimpleCacheServlet</servlet-name>
+		<url-pattern>/simple-cache</url-pattern>
+	</servlet-mapping>
+
+
+  <!-- Template -->
 	<servlet>
 		<servlet-name>StringTemplateServlet</servlet-name>
 		<servlet-class>com.appspot.template.StringTemplateServlet</servlet-class>
@@ -14,7 +33,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>StringTemplateServlet</servlet-name>
 		<url-pattern>/st</url-pattern>
 	</servlet-mapping>
-	
+
 	<!--  Image -->
 	<servlet>
 		<servlet-name>RetrieveImageServlet</servlet-name>
