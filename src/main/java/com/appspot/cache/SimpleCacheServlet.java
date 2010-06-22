@@ -13,6 +13,7 @@ import java.util.Date;
 
 public class SimpleCacheServlet extends HttpServlet {
 
+  private static final long serialVersionUID = 1211642763887796727L;
 
   public void doGet(HttpServletRequest request,
                     HttpServletResponse response)
