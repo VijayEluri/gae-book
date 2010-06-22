@@ -86,9 +86,10 @@
             	<exclude name="web.xml" />
             	<exclude name="build.xml" />
               <exclude name="ivy.xml" />
-              <exclude name="local-ivy-repo" />
+              <exclude name="local-ivy-repo/**" />
               <exclude name=".gitignore" />
               <exclude name="**/*.iml" />
+              <exclude name=".git/**" />              
         	</fileset>
     	</delete>
     </target>
