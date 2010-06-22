@@ -41,6 +41,7 @@
 		  <!--<zipfileset dir="src/graphics/images/gifs"
 		              prefix="images"/>-->
 		</war>
+      <unwar src="blo-gae.war" dest="blo-gae-war" />
     </target>
     
     <!-- ================================= 
