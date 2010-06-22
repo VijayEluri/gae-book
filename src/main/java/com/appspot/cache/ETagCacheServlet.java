@@ -22,7 +22,7 @@ public class ETagCacheServlet extends HttpServlet {
         MemcacheService cache = MemcacheServiceFactory
         .getMemcacheService();
 
-    String cacheKey = request.getPathInfo() + "." + "etag";
+    String cacheKey = request.getRequestURI() + "." + "etag";
     String result = null;
 
     if (!cache.contains(cacheKey) ||
