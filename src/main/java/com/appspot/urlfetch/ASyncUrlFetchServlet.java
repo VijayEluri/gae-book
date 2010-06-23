@@ -30,14 +30,13 @@ public class ASyncUrlFetchServlet extends HttpServlet {
     Future<HTTPResponse> future = urlfetch.fetchAsync(url);
 
     while(!future.isDone()) {
-      Logger.getLogger("bla").info("step");
       try {
-        Thread.sleep(50);
+        Thread.sleep(10);
       } catch (InterruptedException e) {
         throw new ServletException(e);
       }
     }
-    HTTPResponse httpResponse = null;
+    HTTPResponse httpResponse;
     try {
       
       httpResponse = future.get();
