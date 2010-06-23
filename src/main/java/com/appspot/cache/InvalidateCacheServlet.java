@@ -1,6 +1,5 @@
 package com.appspot.cache;
 
-import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 public class InvalidateCacheServlet extends HttpServlet {
 
@@ -25,6 +23,6 @@ public class InvalidateCacheServlet extends HttpServlet {
 
     cache.delete("/simple-cache.article");    
 
-    response.getWriter().write("Cache invalidated for /simple-cache");
+    response.getWriter().write("Cache invalidated - /simple-cache");
   }
 }

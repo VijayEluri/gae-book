@@ -30,13 +30,14 @@ public class ETagCacheServlet extends HttpServlet {
 
       String etag = Long.toString(System.currentTimeMillis());
       response.setHeader("ETag", etag);
-      result = "Loaded into cache at " + (new Date());
       cache.put(cacheKey, etag, Expiration.byDeltaSeconds(120));
+
+      result = "Loaded into cache at " + (new Date());
       response.getWriter().write(result);
+
     } else {
+
       response.setStatus(304);
     }
-
-
   }
 }
