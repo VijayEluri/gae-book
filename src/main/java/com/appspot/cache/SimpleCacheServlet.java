@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-import java.util.logging.Logger;
 
 public class SimpleCacheServlet extends HttpServlet {
 
@@ -24,7 +23,7 @@ public class SimpleCacheServlet extends HttpServlet {
         .getMemcacheService();
 
     String cacheKey = request.getRequestURI() + "." + "article";
-    String result = null;
+    String result;
 
     if (!cache.contains(cacheKey)) {
 
