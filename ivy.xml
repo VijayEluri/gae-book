@@ -19,10 +19,11 @@
 <ivy-module version="2.0">
     <info organisation="org.apache" module="hello-ivy"/>
     <dependencies>
-        <dependency org="google" name="appengine-api" rev="1.3.1"/>
-        <dependency org="google" name="appengine-api-labs" rev="1.3.1"/>
+        <dependency org="google" name="appengine-api" rev="1.4.3"/>
+        <dependency org="google" name="appengine-api-labs" rev="1.4.3"/>
         <dependency org="stringtemplate" name="antlr" rev="2.7.7"/>
-        <dependency org="stringtemplate" name="stringtemplate" rev="3.2.1"/>		<dependency org="apache" name="commons-fileupload" rev="1.2.1"/>
+        <dependency org="stringtemplate" name="stringtemplate" rev="3.2.1"/>
+		<dependency org="apache" name="commons-fileupload" rev="1.2.1"/>
 		<dependency org="tomcat" name="servlet" rev="2.5"/>
     </dependencies>
 </ivy-module>

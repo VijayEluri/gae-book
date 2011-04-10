@@ -6,6 +6,22 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
   <!-- URL Fetch -->
   <servlet>
+		<servlet-name>OpenChannelServlet</servlet-name>
+		<servlet-class>com.appspot.channel.OpenChannelServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OpenChannelServlet</servlet-name>
+		<url-pattern>/open-channel</url-pattern>
+	</servlet-mapping>
+    <servlet>
+		<servlet-name>SendMessageServlet</servlet-name>
+		<servlet-class>com.appspot.channel.SendMessageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SendMessageServlet</servlet-name>
+		<url-pattern>/send-message</url-pattern>
+	</servlet-mapping>
+  <servlet>
 		<servlet-name>ASyncUrlFetchServlet</servlet-name>
 		<servlet-class>com.appspot.urlfetch.ASyncUrlFetchServlet</servlet-class>
 	</servlet>
