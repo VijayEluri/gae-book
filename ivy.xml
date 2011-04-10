@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-    <info  organisation="org.apache" module="hello-ivy"/>
+    <info organisation="org.apache" module="hello-ivy"/>
     <dependencies>
         <dependency org="google" name="appengine-api" rev="1.4.3"/>
         <dependency org="google" name="appengine-api-labs" rev="1.4.3"/>
