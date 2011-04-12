@@ -7,7 +7,7 @@
     <!-- Data store -->
     <servlet>
 		<servlet-name>StoreDataServlet</servlet-name>
-		<servlet-class>com.appspot.datastore.StoreDataServlet</servlet-class>
+		<servlet-class>com.appspot.datastore.StoreDataAsyncServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>StoreDataServlet</servlet-name>
@@ -15,7 +15,7 @@
 	</servlet-mapping>
     <servlet>
 		<servlet-name>QueryDataServlet</servlet-name>
-		<servlet-class>com.appspot.datastore.QueryDataServlet</servlet-class>
+		<servlet-class>com.appspot.datastore.QueryDataAsyncServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>QueryDataServlet</servlet-name>
@@ -23,7 +23,7 @@
 	</servlet-mapping>
     <servlet>
 		<servlet-name>RetrieveDataServlet</servlet-name>
-		<servlet-class>com.appspot.datastore.RetrieveDataServlet</servlet-class>
+		<servlet-class>com.appspot.datastore.RetrieveDataAsyncServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RetrieveDataServlet</servlet-name>
@@ -237,7 +237,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>store-data-url</web-resource-name>
-			<url-pattern>/store-data</url-pattern>
+			<url-pattern>/store-*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>
