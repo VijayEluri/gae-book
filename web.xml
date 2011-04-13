@@ -6,8 +6,32 @@
 	version="2.5">
     <!-- Data store -->
     <servlet>
+		<servlet-name>QueryFilesServlet</servlet-name>
+		<servlet-class>com.appspot.datastore.QueryFilesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QueryFilesServlet</servlet-name>
+		<url-pattern>/query-files</url-pattern>
+	</servlet-mapping>
+    <servlet>
+		<servlet-name>RetrieveBlobServlet</servlet-name>
+		<servlet-class>com.appspot.datastore.RetrieveBlobServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveBlobServlet</servlet-name>
+		<url-pattern>/retrieve-blob/*</url-pattern>
+	</servlet-mapping>
+    <servlet>
+		<servlet-name>StoreBlobServlet</servlet-name>
+		<servlet-class>com.appspot.datastore.StoreBlobServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreBlobServlet</servlet-name>
+		<url-pattern>/store-blob</url-pattern>
+	</servlet-mapping>
+    <servlet>
 		<servlet-name>StoreDataServlet</servlet-name>
-		<servlet-class>com.appspot.datastore.StoreDataAsyncServlet</servlet-class>
+		<servlet-class>com.appspot.datastore.StoreDataTransactionServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>StoreDataServlet</servlet-name>

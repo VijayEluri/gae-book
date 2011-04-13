@@ -31,7 +31,7 @@ public class ReceiveImageServlet extends HttpServlet {
             IOException {
     StringTemplateGroup group = new StringTemplateGroup("xhtml",
             "WEB-INF/templates/xhtml");
-    StringTemplate hello = group.getInstanceOf("upload-file");
+    StringTemplate hello = group.getInstanceOf("upload-image");
     response.getWriter().write(hello.toString());
   }
   
