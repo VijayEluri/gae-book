@@ -9,25 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 public class QueryFilesServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        DatastoreService datastoreService = DatastoreServiceFactory
-                    .getDatastoreService();
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response)
+      throws ServletException, IOException {
 
-        Query query = new Query("__BlobInfo__");
-        PreparedQuery preparedQuery = datastoreService.prepare(query);
+    DatastoreService datastoreService = DatastoreServiceFactory
+        .getDatastoreService();
 
-        List list = preparedQuery.asList(FetchOptions.Builder.withLimit(10));
+    Query query = new Query("__BlobInfo__");
+    PreparedQuery preparedQuery = datastoreService.prepare(query);
 
-        StringTemplateGroup group = new StringTemplateGroup("xhtml",
-                "WEB-INF/templates/xhtml");
-        StringTemplate html = group.getInstanceOf("query-files");
-        html.setAttribute("list", list);
-        response.getWriter().write(html.toString());
-    }
+    List list = preparedQuery.asList(
+        FetchOptions.Builder.withLimit(10));
+
+    StringTemplateGroup group = new StringTemplateGroup("xhtml",
+        "WEB-INF/templates/xhtml");
+    StringTemplate html = group.getInstanceOf("query-files");
+    html.setAttribute("list", list);
+    response.getWriter().write(html.toString());
+  }
 }

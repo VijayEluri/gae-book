@@ -11,27 +11,31 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class RetrieveDataServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  @Override
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response)
+      throws ServletException, IOException {
 
-        String id = request.getRequestURI().replaceAll("/retrieve-data/", "");
-        DatastoreService datastoreService = DatastoreServiceFactory
-                    .getDatastoreService();
+    String id = request.getRequestURI()
+        .replaceAll("/retrieve-data/", "");
+    DatastoreService datastoreService =
+        DatastoreServiceFactory.getDatastoreService();
 
-        Entity blogPost = null;
-        try {
-            blogPost = datastoreService.get(KeyFactory.createKey("BlogPost", id));
-        } catch (EntityNotFoundException e) {
-            // This should not happen: let the 500 page handle it
-            throw new ServletException(e);
-        }
-
-
-        StringTemplateGroup group = new StringTemplateGroup("xhtml",
-                "WEB-INF/templates/xhtml");
-        StringTemplate html = group.getInstanceOf("retrieve-blog-post");
-        html.setAttributes(blogPost.getProperties());
-
-        response.getWriter().write(html.toString());
+    Entity blogPost = null;
+    try {
+      blogPost = datastoreService.get(
+          KeyFactory.createKey("BlogPost", id));
+    } catch (EntityNotFoundException e) {
+      // This should not happen: let the 500 page handle it
+      throw new ServletException(e);
     }
+
+
+    StringTemplateGroup group = new StringTemplateGroup("xhtml",
+        "WEB-INF/templates/xhtml");
+    StringTemplate html = group.getInstanceOf("retrieve-blog-post");
+    html.setAttributes(blogPost.getProperties());
+
+    response.getWriter().write(html.toString());
+  }
 }

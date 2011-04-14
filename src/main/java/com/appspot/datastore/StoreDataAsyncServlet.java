@@ -17,63 +17,66 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class StoreDataAsyncServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-              DatastoreService datastoreService = DatastoreServiceFactory
-              .getDatastoreService();
-        StringTemplateGroup group = new StringTemplateGroup("xhtml",
-                "WEB-INF/templates/xhtml");
-        StringTemplate html = group.getInstanceOf("store-blog-post");
-        response.getWriter().write(html.toString());
+
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response)
+      throws ServletException, IOException {
+
+    DatastoreService datastoreService = DatastoreServiceFactory
+        .getDatastoreService();
+    StringTemplateGroup group = new StringTemplateGroup("xhtml",
+        "WEB-INF/templates/xhtml");
+    StringTemplate html = group.getInstanceOf("store-blog-post");
+    response.getWriter().write(html.toString());
+  }
+
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response)
+      throws ServletException, IOException {
+
+    AsyncDatastoreService datastoreService =
+        DatastoreServiceFactory.getAsyncDatastoreService();
+
+    String title = request.getParameter("title");
+    Entity blogPost = new Entity("BlogPost", normalize(title));
+    blogPost.setProperty("title", title);
+
+    String author = request.getParameter("author");
+    blogPost.setProperty("author", author);
+    String content = request.getParameter("content");
+    blogPost.setProperty("content", content);
+    blogPost.setProperty("date", new Date());
+
+    // if any: (be careful with Tasks Queue)
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+    blogPost.setProperty("user", user);
+
+    Future<Key> key = datastoreService.put(blogPost);
+
+    // do something else, for example process the result template
+    StringTemplateGroup group = new StringTemplateGroup("xhtml",
+        "WEB-INF/templates/xhtml");
+    StringTemplate html = group.getInstanceOf("done-blog-post");
+    html.setAttribute("title", title);
+    html.setAttribute("author", author);
+    html.setAttribute("content", content);
+
+    try {
+      // block until the result is available
+      key.get();
+      // and do nothing with the resulting key
+    } catch (InterruptedException e) {
+      throw new ServletException(e);
+    } catch (ExecutionException e) {
+      throw new ServletException(e);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.getWriter().write(html.toString());
+  }
 
-        AsyncDatastoreService datastoreService = DatastoreServiceFactory
-                     .getAsyncDatastoreService();
-
-        String title = request.getParameter("title");
-        Entity blogPost = new Entity("BlogPost", normalize(title));
-        blogPost.setProperty("title", title);
-
-        String author = request.getParameter("author");
-        blogPost.setProperty("author", author);
-        String content = request.getParameter("content");
-        blogPost.setProperty("content", content);
-        blogPost.setProperty("date", new Date());
-
-        // if any: (be careful with Tasks Queue)
-        UserService userService = UserServiceFactory.getUserService();
-        User user = userService.getCurrentUser();
-        blogPost.setProperty("user", user);
-
-        Future<Key> key = datastoreService.put(blogPost);
-
-        // do something else, for example print the result
-
-        StringTemplateGroup group = new StringTemplateGroup("xhtml",
-                "WEB-INF/templates/xhtml");
-        StringTemplate html = group.getInstanceOf("done-blog-post");
-        html.setAttribute("title", title);
-        html.setAttribute("author", author);
-        html.setAttribute("content", content);
-        response.getWriter().write(html.toString());
-
-        try {
-            // block until the result is available
-            key.get();
-            // and do nothing with the resulting key
-        } catch (InterruptedException e) {
-            throw new ServletException(e);
-        } catch (ExecutionException e) {
-            throw new ServletException(e);
-        }
-
-    }
-
-    private String normalize(String str) {
-        String trimmedLower = str.toLowerCase().trim();
-        return trimmedLower.replaceAll("\\W+", "-");
-    }
+  private String normalize(String str) {
+    String trimmedLower = str.toLowerCase().trim();
+    return trimmedLower.replaceAll("\\W+", "-");
+  }
 }

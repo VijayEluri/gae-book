@@ -13,27 +13,30 @@ import java.util.Date;
 import java.util.List;
 
 public class QueryDataServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        DatastoreService datastoreService = DatastoreServiceFactory
-                    .getDatastoreService();
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response)
+      throws ServletException, IOException {
 
-        Query query = new Query("BlogPost");
-        query.addFilter("date", Query.FilterOperator.LESS_THAN, new Date(System.currentTimeMillis() - 5000));
-        query.addSort("date", Query.SortDirection.DESCENDING);
-        PreparedQuery preparedQuery = datastoreService.prepare(query);
+    DatastoreService datastoreService = DatastoreServiceFactory
+        .getDatastoreService();
 
-        List list = preparedQuery.asList(FetchOptions.Builder.withLimit(10));
+    Query query = new Query("BlogPost");
+    query.addFilter("date", Query.FilterOperator.LESS_THAN,
+        new Date(System.currentTimeMillis() - 5000));
+    query.addSort("date", Query.SortDirection.DESCENDING);
+    PreparedQuery preparedQuery = datastoreService.prepare(query);
 
-        System.out.println("HELLO");
+    List list = preparedQuery.asList(
+        FetchOptions.Builder.withLimit(10));
+
+    System.out.println("HELLO");
 
 
-
-        StringTemplateGroup group = new StringTemplateGroup("xhtml",
-                "WEB-INF/templates/xhtml");
-        StringTemplate html = group.getInstanceOf("query-blog-post");
-        html.setAttribute("list", list);
-        response.getWriter().write(html.toString());
-    }
+    StringTemplateGroup group = new StringTemplateGroup("xhtml",
+        "WEB-INF/templates/xhtml");
+    StringTemplate html = group.getInstanceOf("query-blog-post");
+    html.setAttribute("items", list);
+    response.getWriter().write(html.toString());
+  }
 }

@@ -7,10 +7,6 @@ Please specify a file, or a set of files:<br>
 <input type="file" name="myfile" size="40">
 </p>
 <p>
-<label for="description">Description</label>
-<input type="text" name="caption">
-</p>
-<p>
 <input type="submit" value="Send">
 </p>
 </form>

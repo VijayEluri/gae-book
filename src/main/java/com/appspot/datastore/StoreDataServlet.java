@@ -1,6 +1,5 @@
 package com.appspot.datastore;
 
-import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -18,51 +17,55 @@ import java.io.IOException;
 import java.util.Date;
 
 public class StoreDataServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-              DatastoreService datastoreService = DatastoreServiceFactory
-              .getDatastoreService();
-        StringTemplateGroup group = new StringTemplateGroup("xhtml",
-                "WEB-INF/templates/xhtml");
-        StringTemplate html = group.getInstanceOf("store-blog-post");
-        response.getWriter().write(html.toString());
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response)
+      throws ServletException, IOException {
 
-        DatastoreService datastoreService = DatastoreServiceFactory
-                    .getDatastoreService();
+    DatastoreService datastoreService = DatastoreServiceFactory
+        .getDatastoreService();
+    StringTemplateGroup group = new StringTemplateGroup("xhtml",
+        "WEB-INF/templates/xhtml");
+    StringTemplate html = group.getInstanceOf("store-blog-post");
+    response.getWriter().write(html.toString());
+  }
 
-        String title = request.getParameter("title");
-        Entity blogPost = new Entity("BlogPost", normalize(title));
-        blogPost.setProperty("title", title);
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response)
+      throws ServletException, IOException {
 
-        String author = request.getParameter("author");
-        blogPost.setProperty("author", author);
-        String content = request.getParameter("content");
-        blogPost.setProperty("content", content);
-        blogPost.setProperty("date", new Date());
+    DatastoreService datastoreService = DatastoreServiceFactory
+        .getDatastoreService();
 
-        // if any: (be careful with Tasks Queue)
-        UserService userService = UserServiceFactory.getUserService();
-        User user = userService.getCurrentUser();
-        blogPost.setProperty("user", user);
+    String title = request.getParameter("title");
+    Entity blogPost = new Entity("BlogPost", normalize(title));
+    blogPost.setProperty("title", title);
 
-        datastoreService.put(blogPost);
+    String author = request.getParameter("author");
+    blogPost.setProperty("author", author);
+    String content = request.getParameter("content");
+    blogPost.setProperty("content", content);
+    blogPost.setProperty("date", new Date());
 
-        StringTemplateGroup group = new StringTemplateGroup("xhtml",
-                "WEB-INF/templates/xhtml");
-        StringTemplate html = group.getInstanceOf("done-blog-post");
-        html.setAttribute("title", title);
-        html.setAttribute("author", author);
-        html.setAttribute("content", content);
-        response.getWriter().write(html.toString());
+    // if any: (be careful with Tasks Queue)
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+    blogPost.setProperty("user", user);
 
-    }
+    datastoreService.put(blogPost);
 
-    private String normalize(String str) {
-        String trimmedLower = str.toLowerCase().trim();
-        return trimmedLower.replaceAll("\\W+", "-");
-    }
+    StringTemplateGroup group = new StringTemplateGroup("xhtml",
+        "WEB-INF/templates/xhtml");
+    StringTemplate html = group.getInstanceOf("done-blog-post");
+    html.setAttribute("title", title);
+    html.setAttribute("author", author);
+    html.setAttribute("content", content);
+    response.getWriter().write(html.toString());
+
+  }
+
+  private String normalize(String str) {
+    String trimmedLower = str.toLowerCase().trim();
+    return trimmedLower.replaceAll("\\W+", "-");
+  }
 }
