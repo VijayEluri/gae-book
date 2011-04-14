@@ -22,8 +22,6 @@ public class StoreDataTransactionServlet extends HttpServlet {
                        HttpServletResponse response)
       throws ServletException, IOException {
 
-    DatastoreService datastoreService = DatastoreServiceFactory
-        .getDatastoreService();
     StringTemplateGroup group = new StringTemplateGroup("xhtml",
         "WEB-INF/templates/xhtml");
     StringTemplate html = group.getInstanceOf("store-blog-post");

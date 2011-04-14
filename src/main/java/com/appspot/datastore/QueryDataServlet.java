@@ -30,9 +30,6 @@ public class QueryDataServlet extends HttpServlet {
     List list = preparedQuery.asList(
         FetchOptions.Builder.withLimit(10));
 
-    System.out.println("HELLO");
-
-
     StringTemplateGroup group = new StringTemplateGroup("xhtml",
         "WEB-INF/templates/xhtml");
     StringTemplate html = group.getInstanceOf("query-blog-post");

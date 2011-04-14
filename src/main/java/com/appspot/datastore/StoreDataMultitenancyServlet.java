@@ -22,8 +22,7 @@ public class StoreDataMultitenancyServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response)
       throws ServletException, IOException {
-    DatastoreService datastoreService = DatastoreServiceFactory
-        .getDatastoreService();
+
     StringTemplateGroup group = new StringTemplateGroup("xhtml",
         "WEB-INF/templates/xhtml");
     StringTemplate html = group.getInstanceOf("store-blog-post");
