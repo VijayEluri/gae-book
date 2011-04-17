@@ -1,6 +1,5 @@
 package client;
 
-
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -23,7 +22,8 @@ public class RemoteApiClient {
             RemoteApiInstaller installer = new RemoteApiInstaller();
             installer.install(options);
 
-            DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
+            DatastoreService datastoreService =
+                DatastoreServiceFactory.getDatastoreService();
 
             for(int i = 0; i < 10; i++) {
                 Entity entity = new Entity("AutoCount");
