@@ -13,6 +13,26 @@
     <servlet-name>CheckUserServlet</servlet-name>
     <url-pattern>/check-user</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>CheckFederatedServlet</servlet-name>
+    <servlet-class>
+      com.appspot.security.CheckFederatedServlet
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckFederatedServlet</servlet-name>
+    <url-pattern>/check-federated</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CheckOAuthServlet</servlet-name>
+    <servlet-class>
+      com.appspot.security.CheckOAuthServlet
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckOAuthServlet</servlet-name>
+    <url-pattern>/check-oauth</url-pattern>
+  </servlet-mapping>
   <!-- Data store -->
   <servlet>
 		<servlet-name>RemoteApiServlet</servlet-name>
