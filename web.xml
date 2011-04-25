@@ -4,8 +4,17 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-    <!-- Data store -->
-    <servlet>
+  <!-- Security -->
+  <servlet>
+    <servlet-name>CheckUserServlet</servlet-name>
+    <servlet-class>com.appspot.security.CheckUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckUserServlet</servlet-name>
+    <url-pattern>/check-user</url-pattern>
+  </servlet-mapping>
+  <!-- Data store -->
+  <servlet>
 		<servlet-name>RemoteApiServlet</servlet-name>
 		<servlet-class>com.google.apphosting.utils.remoteapi.RemoteApiServlet</servlet-class>
 	</servlet>
