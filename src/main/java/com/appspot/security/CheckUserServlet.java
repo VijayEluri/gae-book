@@ -27,7 +27,7 @@ public class CheckUserServlet extends HttpServlet {
       User user = userService.getCurrentUser();
       String url = userService.createLogoutURL(
           request.getRequestURI());
-      StringTemplate template = group.getInstanceOf("logout");
+      StringTemplate template = group.getInstanceOf("logged-in");
       template.setAttribute("user", user);
       template.setAttribute("url", url);
       response.getWriter().write(template.toString());
@@ -35,7 +35,7 @@ public class CheckUserServlet extends HttpServlet {
     } else {
       String url = userService.createLoginURL(
                 request.getRequestURI());
-      StringTemplate template = group.getInstanceOf("login");
+      StringTemplate template = group.getInstanceOf("logged-out");
       template.setAttribute("url", url);
       response.getWriter().write(template.toString());
     }
