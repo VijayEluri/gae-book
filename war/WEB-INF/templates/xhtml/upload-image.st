@@ -1,4 +1,8 @@
 <html>
+<head>
+<title>Test</title>
+$analytics()$
+</head>
 <body>
 <h1>File upload</h1>
 <form action="" enctype="multipart/form-data" method="post">

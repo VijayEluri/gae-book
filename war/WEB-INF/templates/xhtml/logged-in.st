@@ -1,4 +1,8 @@
 <html>
+<head>
+<title>Test</title>
+$analytics()$
+</head>
 <body>
 <h1>Logged In as $user.nickname$</h1>
 <p>EMail: $user.email$</p>

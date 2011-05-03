@@ -1,4 +1,8 @@
 <html>
+<head>
+<title>Test</title>
+$analytics()$
+</head>
 <body>
 <form action="" method="post">
 <p>

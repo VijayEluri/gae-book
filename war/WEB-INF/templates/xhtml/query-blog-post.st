@@ -1,4 +1,8 @@
 <html>
+<head>
+<title>Test</title>
+$analytics()$
+</head>
 <body>
 <p>Query Blog Post</p>
 <ul>

@@ -25,13 +25,15 @@ public class SendXMPPServlet extends HttpServlet {
     if(xmppService.getPresence(jid).isAvailable()) {
       SendResponse sendResponse = xmppService.sendMessage(message);
       if(sendResponse.getStatusMap().get(jid) == SendResponse
-          .Status.SUCCESS)
+          .Status.SUCCESS) {
         response.getWriter().write("OK");
-      else
+      }
+      else {
         response.getWriter().write("NOT OK");
+      }
 
     }  else {
-      response.getWriter().write("NO JID");
+      response.getWriter().write("Unavailable");
     }
 
   }
