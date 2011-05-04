@@ -335,7 +335,9 @@
 	</servlet-mapping>
   <servlet>
     <servlet-name>appstats</servlet-name>
-    <servlet-class>com.google.appengine.tools.appstats.AppstatsServlet</servlet-class>
+    <servlet-class>
+      com.google.appengine.tools.appstats.AppstatsServlet
+    </servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>appstats</servlet-name>
@@ -343,11 +345,9 @@
   </servlet-mapping>
   <filter>
     <filter-name>appstats</filter-name>
-    <filter-class>com.google.appengine.tools.appstats.AppstatsFilter</filter-class>
-    <init-param>
-        <param-name>logMessage</param-name>
-        <param-value>Appstats available: /appstats/details?time={ID}</param-value>
-    </init-param>
+    <filter-class>
+      com.google.appengine.tools.appstats.AppstatsFilter
+    </filter-class>
   </filter>
   <filter-mapping>
     <filter-name>appstats</filter-name>
