@@ -34,8 +34,8 @@ public class StoreImageServlet extends HttpServlet {
             IOException {
     StringTemplateGroup group = new StringTemplateGroup("xhtml",
             "WEB-INF/templates/xhtml");
-    StringTemplate hello = group.getInstanceOf("upload-file");
-    response.getWriter().write(hello.toString());
+    StringTemplate st = group.getInstanceOf("upload-file");
+    response.getWriter().write(st.toString());
   }
 
   protected void doPost(HttpServletRequest request,

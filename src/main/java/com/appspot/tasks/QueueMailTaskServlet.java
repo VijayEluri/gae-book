@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.labs.taskqueue.Queue;
-import com.google.appengine.api.labs.taskqueue.QueueFactory;
-import com.google.appengine.api.labs.taskqueue.TaskOptions;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 
 public class QueueMailTaskServlet extends HttpServlet {
 
@@ -21,7 +21,7 @@ public class QueueMailTaskServlet extends HttpServlet {
       throws ServletException, IOException {
 
     TaskOptions task = TaskOptions.Builder
-        .url("/tasks/m")
+        .withUrl("/tasks/m")
         .param("recipient", "adriaandejonge+1@gmail.com")
         .param("thread", "Question about JavaMail API")
         .param("url", "http://my-url/post/news-about-javamail")

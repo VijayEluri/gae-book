@@ -22,9 +22,9 @@ public class OpenChannelServlet extends HttpServlet {
 
         StringTemplateGroup group = new StringTemplateGroup("xhtml",
             "WEB-INF/templates/channel");
-        StringTemplate hello = group.getInstanceOf("index");
-        hello.setAttribute("token", token);
-        response.getWriter().write(hello.toString());
+        StringTemplate st = group.getInstanceOf("index");
+        st.setAttribute("token", token);
+        response.getWriter().write(st.toString());
 
     }
 }

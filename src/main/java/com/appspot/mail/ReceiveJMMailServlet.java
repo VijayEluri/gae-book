@@ -1,7 +1,8 @@
 package com.appspot.mail;
 
-import java.io.IOException;
-import java.util.Properties;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
@@ -14,21 +15,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Properties;
 
-public class ReceiveMailServlet extends HttpServlet {
+public class ReceiveJMMailServlet extends HttpServlet {
 
-  private static final long serialVersionUID 
-      = -7871699848446235625L;
-
-  protected void doPost(HttpServletRequest request, 
-          HttpServletResponse response)
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response)
       throws ServletException, IOException {
-    StoredMessage received = readRequestMessage(request);
-    storeMessage(received);
-  }
-
-  private StoredMessage readRequestMessage(HttpServletRequest 
-      request) throws ServletException, IOException {
 
     Properties props = new Properties();
     Session session = Session.getDefaultInstance(props, null);
@@ -37,11 +32,17 @@ public class ReceiveMailServlet extends HttpServlet {
       MimeMessage receivedMessage = new MimeMessage(session, request
           .getInputStream());
 
-      String subject = receivedMessage.getSubject();
-      String sender = readSender(receivedMessage);
-      Object content = readMessage(receivedMessage);
+      DatastoreService datastoreService = DatastoreServiceFactory
+          .getDatastoreService();
 
-      return new StoredMessage(sender, subject, content);
+      Entity mail = new Entity("ReceivedJMMail");
+
+      mail.setProperty("subject", receivedMessage.getSubject());
+      mail.setProperty("content", readMessage(receivedMessage));
+      mail.setProperty("sender", readSender(receivedMessage));
+      mail.setProperty("date", new Date());
+
+      datastoreService.put(mail);
 
     } catch (MessagingException e) {
       throw new ServletException(e);
@@ -74,12 +75,4 @@ public class ReceiveMailServlet extends HttpServlet {
       throw new ServletException(e);
     }
   }
-
-  private void storeMessage(StoredMessage message) {
-   // @TODO Fix
-    /* ObjectifyService.register(StoredMessage.class);
-    Objectify objectify = ObjectifyService.begin();
-    objectify.put(message);*/
-  }
-
 }
